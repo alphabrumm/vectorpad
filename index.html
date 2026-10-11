@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#1C212C">
 <title>VectorPad</title>
 <style>
-:root{--bg:#e9edf2;--panel:#fff;--line:#d6dce4;--text:#1d2733;--muted:#687585;--accent:#2563eb;--accent-soft:#dbe7fd;--hover:#f1f4f8;--stage:#cfd6df}
+:root{--bg:#151922;--panel:#1C212C;--line:#2F3647;--text:#E8EBF2;--muted:#9BA4B6;--accent:#8099FF;--accent-soft:#283158;--accent-ink:#0F1430;--hover:#262C3A;--stage:#10131A;--marker:#FFD43B;color-scheme:dark}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;overflow:hidden}
 body{font:14px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:var(--bg);display:flex;flex-direction:column;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
@@ -17,7 +17,7 @@ header{flex:none;height:52px;display:flex;align-items:center;gap:6px;padding:0 1
 .brand{font-weight:700;font-size:17px;margin:0 6px 0 2px;white-space:nowrap}
 .brand span{color:var(--accent)}
 .fname{width:170px;max-width:28vw;border:1px solid transparent;border-radius:8px;padding:7px 9px;font:inherit;background:var(--hover);color:var(--text)}
-.fname:focus{outline:none;border-color:var(--accent);background:#fff}
+.fname:focus{outline:none;border-color:var(--accent);background:var(--bg)}
 .spacer{flex:1}
 .ib{height:40px;min-width:40px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 8px;border:0;border-radius:10px;background:transparent;cursor:pointer;white-space:nowrap}
 .ib:hover{background:var(--hover)}
@@ -30,15 +30,15 @@ header{flex:none;height:52px;display:flex;align-items:center;gap:6px;padding:0 1
 .grp{display:flex;align-items:center;gap:6px;flex:none}
 .lbl{font-size:12px;color:var(--muted)}
 .slot{display:flex;flex-direction:column;align-items:center;gap:2px;border:0;background:transparent;padding:4px 5px;border-radius:10px;cursor:pointer}
-.slot i{width:34px;height:26px;border-radius:7px;border:1px solid rgba(0,0,0,.22);display:block}
+.slot i{width:34px;height:26px;border-radius:7px;border:1px solid rgba(255,255,255,.22);display:block}
 .slot span{font-size:10px;color:var(--muted)}
 .slot.active{background:var(--accent-soft)}
 .slot.active span{color:var(--accent);font-weight:600}
 .slot:disabled{opacity:.35}
 .none{background:#fff linear-gradient(to top right,transparent calc(50% - 1.5px),#e11d48 calc(50% - 1.5px),#e11d48 calc(50% + 1.5px),transparent calc(50% + 1.5px))!important}
 .palette{display:grid;grid-template-columns:repeat(10,21px);gap:3px}
-.sw{width:21px;height:21px;border-radius:5px;border:1px solid rgba(0,0,0,.18);cursor:pointer;padding:0}
-.custom{position:relative;width:34px;height:34px;border-radius:10px;overflow:hidden;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);background:conic-gradient(red,yellow,lime,cyan,blue,magenta,red);flex:none}
+.sw{width:21px;height:21px;border-radius:5px;border:1px solid rgba(255,255,255,.16);cursor:pointer;padding:0}
+.custom{position:relative;width:34px;height:34px;border-radius:10px;overflow:hidden;border:2px solid var(--panel);box-shadow:0 0 0 1px var(--line);background:conic-gradient(red,yellow,lime,cyan,blue,magenta,red);flex:none}
 .custom input{position:absolute;inset:-4px;opacity:0;width:calc(100% + 8px);height:calc(100% + 8px);cursor:pointer}
 input[type=range]{width:110px;accent-color:var(--accent)}
 .val{min-width:28px;font-variant-numeric:tabular-nums}
@@ -48,10 +48,10 @@ main{flex:1;display:flex;min-height:0}
 .hsep{width:32px;height:1px;background:var(--line);margin:4px 0;flex:none}
 #stage{flex:1;overflow:auto;background:var(--stage);-webkit-overflow-scrolling:touch}
 #inner{min-width:100%;min-height:100%;width:max-content;height:max-content;display:flex;align-items:center;justify-content:center;padding:28px}
-#svg{display:block;flex:none;box-shadow:0 2px 14px rgba(0,0,0,.2);touch-action:none;background:#fff}
+#svg{display:block;flex:none;box-shadow:0 4px 28px rgba(0,0,0,.55);touch-action:none;background:#fff}
 #svg text{-webkit-user-select:none;user-select:none}
-#scrim{position:fixed;inset:0;background:rgba(15,23,42,.35);opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}
-#drawer{position:fixed;top:0;bottom:0;left:0;width:300px;max-width:86vw;background:var(--panel);z-index:21;transform:translateX(-105%);transition:transform .22s ease;display:flex;flex-direction:column;box-shadow:4px 0 24px rgba(0,0,0,.15)}
+#scrim{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}
+#drawer{position:fixed;top:0;bottom:0;left:0;width:300px;max-width:86vw;background:var(--panel);z-index:21;transform:translateX(-105%);transition:transform .22s ease;display:flex;flex-direction:column;box-shadow:4px 0 24px rgba(0,0,0,.5)}
 body.menu #scrim{opacity:1;pointer-events:auto}
 body.menu #drawer{transform:none}
 .dhead{height:52px;flex:none;display:flex;align-items:center;gap:6px;padding:0 10px;border-bottom:1px solid var(--line)}
@@ -60,19 +60,19 @@ body.menu #drawer{transform:none}
 .ditem:hover{background:var(--hover)}
 .dsec{font-size:11px;color:var(--muted);padding:14px 12px 4px;text-transform:uppercase;letter-spacing:.05em}
 .dfoot{margin-top:auto;padding:12px 16px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
-.modal{position:fixed;inset:0;background:rgba(15,23,42,.35);display:none;align-items:center;justify-content:center;z-index:30}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:30}
 .modal.open{display:flex}
-.card{background:var(--panel);border-radius:14px;padding:18px;width:340px;max-width:92vw;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+.card{background:var(--panel);border-radius:14px;padding:18px;width:340px;max-width:92vw;border:1px solid var(--line);box-shadow:0 18px 50px -12px rgba(0,0,0,.6)}
 .card h3{margin:0 0 12px;font-size:17px}
 .row{display:flex;gap:10px;margin-bottom:12px}
 .row label{flex:1;display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted)}
-.row input{font:inherit;padding:8px;border:1px solid var(--line);border-radius:8px;color:var(--text);width:100%}
+.row input{font:inherit;padding:8px;border:1px solid var(--line);border-radius:8px;color:var(--text);background:var(--bg);width:100%}
 .presets{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
 .chip{border:1px solid var(--line);background:var(--hover);border-radius:999px;padding:6px 11px;cursor:pointer;font-size:12px}
 .actions{display:flex;justify-content:flex-end;gap:8px}
 .btn{border:0;border-radius:10px;padding:9px 15px;cursor:pointer;background:var(--hover)}
-.btn.primary{background:var(--accent);color:#fff}
-#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:#1d2733;color:#fff;padding:10px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:.2s;z-index:40;font-size:13px}
+.btn.primary{background:var(--accent);color:var(--accent-ink);font-weight:600}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--text);color:var(--bg);padding:10px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:.2s;z-index:40;font-size:13px}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 </style>
 </head>
@@ -244,7 +244,7 @@ function render(){
 }
 function addHandle(x,y,h){
   const k=1/S.zoom;
-  const c=mk('circle',{cx:x,cy:y,r:7*k,fill:'#fff',stroke:'#2563eb','stroke-width':2*k});c.dataset.h=h;
+  const c=mk('circle',{cx:x,cy:y,r:7*k,fill:'#fff',stroke:'#3157F5','stroke-width':2*k});c.dataset.h=h;
   const hit=mk('circle',{cx:x,cy:y,r:18*k,fill:'transparent'});hit.dataset.h=h;
   gSel.append(c,hit);
 }
@@ -254,7 +254,7 @@ function renderSel(){
   let b={x:s.x,y:s.y,w:s.w,h:s.h};
   if(s.type==='text'){const el=gShapes.querySelector(`[data-id="${s.id}"]`);try{const bb=el.getBBox();b={x:bb.x,y:bb.y,w:bb.width,h:bb.height};}catch(_){}}
   const p=4*k;
-  gSel.append(mk('rect',{x:b.x-p,y:b.y-p,width:b.w+2*p,height:b.h+2*p,fill:'none',stroke:'#2563eb','stroke-width':1.5*k,'stroke-dasharray':`${5*k} ${4*k}`,'pointer-events':'none'}));
+  gSel.append(mk('rect',{x:b.x-p,y:b.y-p,width:b.w+2*p,height:b.h+2*p,fill:'none',stroke:'#3157F5','stroke-width':1.5*k,'stroke-dasharray':`${5*k} ${4*k}`,'pointer-events':'none'}));
   if(s.type!=='text')[['nw',b.x,b.y],['ne',b.x+b.w,b.y],['sw',b.x,b.y+b.h],['se',b.x+b.w,b.y+b.h]].forEach(([h,x,y])=>addHandle(x,y,h));
 }
 
